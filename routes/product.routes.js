@@ -4,6 +4,7 @@ import { isAdmin } from "../middlewares/isAdmin.js";
 import isAuth from "../middlewares/isAuth.js";
 import { ProductModel } from "../model/product.model.js";
 import { UserModel } from "../model/user.model.js";
+import { validateFields } from "../utils/requeridFields.js";
 
 const productRouter = express.Router();
 
@@ -18,22 +19,15 @@ productRouter.post(
   isAdmin,
   async (req, res) => {
     try {
-      const requireFields = ["name", "description"];
-      let error = false;
-      let fieldError;
-      requireFields.forEach((field) => {
-        if (!req.body[`${field}`] || typeof req.body[`${field}`] !== "string") {
-          error = true;
-          fieldError = field;
-        }
-      });
+      const { error, msg } = validateFields(
+        req,
+        ["name", "description"],
+        ["price"]
+      );
 
       if (error) {
-        return res.status(400).json({ msg: `Can not defined ${fieldError}` });
+        return res.status(400).json({ msg });
       }
-
-      if (typeof req.body.price !== "number")
-        return res.status(400).json({ msg: "Price has be a number" });
 
       const loggedInUser = req.currentUser;
       const newProduct = await ProductModel.create({
@@ -79,6 +73,16 @@ productRouter.put(
   isAuth,
   attachCurrentUser,
   async (req, res) => {
+    const { error, msg } = validateFields(
+      req,
+      ["name", "description"],
+      ["price"]
+    );
+
+    if (error) {
+      return res.status(400).json({ msg });
+    }
+
     try {
       const loggedInUser = req.currentUser;
       const updatedProduct = await ProductModel.findOneAndUpdate(
