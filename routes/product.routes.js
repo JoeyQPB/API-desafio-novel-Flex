@@ -64,4 +64,14 @@ productRouter.get("/list", isAuth, attachCurrentUser, async (req, res) => {
   }
 });
 
+productRouter.get("/show/:id", isAuth, attachCurrentUser, async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    return res.status(200).json(product);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
 export { productRouter };
