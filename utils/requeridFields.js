@@ -1,17 +1,19 @@
-export function validateFields(req, requireFields, requireFieldNumber) {
+export function validateFields(req, requireFieldsString, requireFieldsNumber) {
   let error = false;
   let msg;
-  requireFields.forEach((field) => {
+  requireFieldsString.forEach((field) => {
     if (!req.body[`${field}`] || typeof req.body[`${field}`] !== "string") {
       error = true;
       msg = `Can not defined -${field}-`;
     }
   });
 
-  if (typeof requireFieldNumber !== "number") {
-    error = true;
-    msg = ` -${requireFieldNumber}- must be a number`;
-  }
+  requireFieldsNumber.forEach((field) => {
+    if (!req.body[`${field}`] || typeof req.body[`${field}`] !== "number") {
+      error = true;
+      msg = `Can not defined -${field}-`;
+    }
+  });
 
   return {
     error: error,
