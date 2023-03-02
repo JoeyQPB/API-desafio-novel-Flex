@@ -8,10 +8,6 @@ import { validateFields } from "../utils/requeridFields.js";
 
 const productRouter = express.Router();
 
-productRouter.get("/", (req, res) => {
-  return res.status(200).json({ msg: "ok" });
-});
-
 productRouter.post(
   "/create_product",
   isAuth,
@@ -119,6 +115,24 @@ productRouter.patch(
         { new: true, runValidators: true }
       );
       return res.status(200).json(updatedPartialProduct);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  }
+);
+
+productRouter.delete(
+  "/delete/:id",
+  isAuth,
+  attachCurrentUser,
+  isAdmin,
+  async (req, res) => {
+    try {
+      const deleteProduct = await ProductModel.deleteOne({
+        _id: req.params.id,
+      });
+      return res.status(200).json(deleteProduct);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
