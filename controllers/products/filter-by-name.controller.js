@@ -9,13 +9,13 @@ export const filterByNameController = {
         });
       }
 
-      const productsfilter = await ProductModel.find({
+      const productsFilter = await ProductModel.find({
         name: req.body.inputName,
       });
-      if (productsfilter.length < 1)
+      if (productsFilter.length < 1)
         return res.status(404).json({ msg: "Product not found" });
 
-      return res.status(200).json(productsfilter);
+      return res.status(200).json(productsFilter);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
