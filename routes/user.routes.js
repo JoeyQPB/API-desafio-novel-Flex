@@ -5,10 +5,6 @@ import { generateToken } from "../config/jwt.config.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/", (req, res) => {
-  return res.status(200).json({ msg: "Hello" });
-});
-
 userRouter.post("/signup", async (req, res) => {
   try {
     const { password } = req.body;
@@ -52,6 +48,17 @@ userRouter.post("/login", async (req, res) => {
       },
       token: token,
     });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+userRouter.get("/list", async (req, res) => {
+  try {
+    console.log("oi");
+    const usersList = await UserModel.find({});
+    return res.status(200).json(usersList);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
