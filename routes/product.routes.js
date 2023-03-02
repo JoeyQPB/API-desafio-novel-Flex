@@ -74,4 +74,27 @@ productRouter.get("/show/:id", isAuth, attachCurrentUser, async (req, res) => {
   }
 });
 
+productRouter.put(
+  "/update/:id",
+  isAuth,
+  attachCurrentUser,
+  async (req, res) => {
+    try {
+      const loggedInUser = req.currentUser;
+      const updatedProduct = await ProductModel.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          ...req.body,
+          $push: { updatedAt: Date.now(), updatedBy: loggedInUser._id },
+        },
+        { new: true, runValidators: true }
+      );
+      return res.status(200).json(updatedProduct);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  }
+);
+
 export { productRouter };
