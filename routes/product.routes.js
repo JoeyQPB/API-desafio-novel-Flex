@@ -72,6 +72,7 @@ productRouter.put(
   "/update/:id",
   isAuth,
   attachCurrentUser,
+  isAdmin,
   async (req, res) => {
     const { error, msg } = validateFields(
       req,
@@ -105,6 +106,7 @@ productRouter.patch(
   "/update_partial/:id",
   isAuth,
   attachCurrentUser,
+  isAdmin,
   async (req, res) => {
     try {
       const loggedInUser = req.currentUser;
