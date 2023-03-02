@@ -47,6 +47,8 @@ productRouter.post(
 productRouter.get("/list", isAuth, attachCurrentUser, async (req, res) => {
   try {
     const products = await ProductModel.find({});
+    if (!products)
+      return res.status(404).json({ msg: "no product has been registered" });
     return res.status(200).json(products);
   } catch (err) {
     console.log(err);
@@ -57,6 +59,7 @@ productRouter.get("/list", isAuth, attachCurrentUser, async (req, res) => {
 productRouter.get("/show/:id", isAuth, attachCurrentUser, async (req, res) => {
   try {
     const product = await ProductModel.findById(req.params.id);
+    if (!product) return res.status(404).json({ msg: "Product not found" });
     return res.status(200).json(product);
   } catch (err) {
     console.log(err);
