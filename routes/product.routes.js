@@ -1,6 +1,7 @@
 import express from "express";
 import { createProductController } from "../controllers/products/create.controller.js";
 import { deleteProductController } from "../controllers/products/delete.controller.js";
+import { filterByNameController } from "../controllers/products/filter-by-name.controller.js";
 import { listProductByNameController } from "../controllers/products/list-by-name.controller.js";
 import { listProductByPriceController } from "../controllers/products/list-by-price.controller.js";
 import { listProductController } from "../controllers/products/list.controller.js";
@@ -10,6 +11,7 @@ import { updateProductController } from "../controllers/products/update.controll
 import attachCurrentUser from "../middlewares/attachCurrentUser.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 import isAuth from "../middlewares/isAuth.js";
+import { ProductModel } from "../model/product.model.js";
 
 const productRouter = express.Router();
 
@@ -20,6 +22,22 @@ productRouter.post(
   isAdmin,
   createProductController.handle
 );
+
+productRouter.post(
+  "/filter_name",
+  isAuth,
+  attachCurrentUser,
+  filterByNameController.handle
+);
+
+// filter by description
+// productRouter.post(
+//   "/create_product",
+//   isAuth,
+//   attachCurrentUser,
+//   isAdmin,
+//   createProductController.handle
+// );
 
 productRouter.get(
   "/list",
