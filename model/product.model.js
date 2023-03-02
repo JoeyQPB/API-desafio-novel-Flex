@@ -6,6 +6,7 @@ const productSchema = new Schema({
   price: { type: Number, require: true },
   createdBy: { type: Types.ObjectId, ref: "User", require: true },
   createdAt: { type: Date, default: Date.now() },
+  updatedBy: [{ type: Types.ObjectId, ref: "User", require: true }],
   updatedAt: [{ type: Date }],
 });
 
