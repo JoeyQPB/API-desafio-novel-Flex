@@ -1,7 +1,7 @@
 import { ProductModel } from "../../model/product.model.js";
 
 export const listProductController = {
-  async list(req, res) {
+  async handle(req, res) {
     try {
       const products = await ProductModel.find({});
       if (!products)

@@ -3,7 +3,7 @@ import { UserModel } from "../../model/user.model.js";
 import { validateFields } from "../../utils/requeridFields.js";
 
 export const createProductController = {
-  async create(req, res) {
+  async handle(req, res) {
     try {
       const { error, msg } = validateFields(
         req,

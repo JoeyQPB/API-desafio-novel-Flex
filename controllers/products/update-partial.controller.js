@@ -1,7 +1,7 @@
 import { ProductModel } from "../../model/product.model.js";
 
 export const updatePartialProductController = {
-  async updatePartial(req, res) {
+  async handle(req, res) {
     try {
       const loggedInUser = req.currentUser;
       const updatedPartialProduct = await ProductModel.findOneAndUpdate(

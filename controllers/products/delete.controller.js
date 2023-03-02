@@ -1,7 +1,7 @@
 import { ProductModel } from "../../model/product.model.js";
 
 export const deleteProductController = {
-  async delete(req, res) {
+  async handle(req, res) {
     try {
       const deleteProduct = await ProductModel.deleteOne({
         _id: req.params.id,

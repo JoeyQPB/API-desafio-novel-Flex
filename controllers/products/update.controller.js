@@ -2,7 +2,7 @@ import { ProductModel } from "../../model/product.model.js";
 import { validateFields } from "../../utils/requeridFields.js";
 
 export const updateProductController = {
-  async update(req, res) {
+  async handle(req, res) {
     const { error, msg } = validateFields(
       req,
       ["name", "description"],

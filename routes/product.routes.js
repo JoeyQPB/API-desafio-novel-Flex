@@ -16,21 +16,37 @@ productRouter.post(
   isAuth,
   attachCurrentUser,
   isAdmin,
-  createProductController.create
+  createProductController.handle
 );
 
 productRouter.get(
   "/list",
   isAuth,
   attachCurrentUser,
-  listProductController.list
+  listProductController.handle
 );
+
+// order by name
+// productRouter.get(
+//   "/list",
+//   isAuth,
+//   attachCurrentUser,
+//   listProductController.handle
+// );
+
+// order by price
+// productRouter.get(
+//   "/list",
+//   isAuth,
+//   attachCurrentUser,
+//   listProductController.handle
+// );
 
 productRouter.get(
   "/show/:id",
   isAuth,
   attachCurrentUser,
-  showProductController.show
+  showProductController.handle
 );
 
 productRouter.put(
@@ -38,7 +54,7 @@ productRouter.put(
   isAuth,
   attachCurrentUser,
   isAdmin,
-  updateProductController.update
+  updateProductController.handle
 );
 
 productRouter.patch(
@@ -46,7 +62,7 @@ productRouter.patch(
   isAuth,
   attachCurrentUser,
   isAdmin,
-  updatePartialProductController.updatePartial
+  updatePartialProductController.handle
 );
 
 productRouter.delete(
@@ -54,7 +70,7 @@ productRouter.delete(
   isAuth,
   attachCurrentUser,
   isAdmin,
-  deleteProductController.delete
+  deleteProductController.handle
 );
 
 export { productRouter };

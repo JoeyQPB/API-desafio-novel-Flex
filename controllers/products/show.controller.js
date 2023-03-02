@@ -1,7 +1,7 @@
 import { ProductModel } from "../../model/product.model.js";
 
 export const showProductController = {
-  async show(req, res) {
+  async handle(req, res) {
     try {
       const product = await ProductModel.findById(req.params.id);
       if (!product) return res.status(404).json({ msg: "Product not found" });
