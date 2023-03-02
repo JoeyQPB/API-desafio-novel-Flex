@@ -4,72 +4,24 @@ import { UserModel } from "../model/user.model.js";
 import { generateToken } from "../config/jwt.config.js";
 import isAuth from "../middlewares/isAuth.js";
 import attachCurrentUser from "../middlewares/attachCurrentUser.js";
-import { isAdmin } from "../middlewares/isAdmin.js";
+import { signupUserController } from "../controllers/users/signup.controller.js";
+import { loginUserController } from "../controllers/users/login.controller.js";
+import { listUserController } from "../controllers/users/list.controller.js";
+import { profileUserController } from "../controllers/users/profile.controller.js";
 
 const userRouter = express.Router();
 
-userRouter.post("/signup", async (req, res) => {
-  try {
-    const { password } = req.body;
-    if (!password) return res.status(400).json({ msg: "Password is required" });
+userRouter.post("/signup", signupUserController.signup);
 
-    const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
-    const hashedPassword = await bcrypt.hash(password, salt);
+userRouter.post("/login", loginUserController.login);
 
-    const newUser = await UserModel.create({
-      ...req.body,
-      passwordHash: hashedPassword,
-    });
+userRouter.get("/list", listUserController.list);
 
-    delete newUser._doc.passwordHash;
-    return res.status(200).json(newUser);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-});
-
-userRouter.post("/login", async (req, res) => {
-  try {
-    const { name, password } = req.body;
-
-    if (!name || !password)
-      return res.status(400).json({ msg: "fill in all fields" });
-
-    const user = await UserModel.findOne({ name });
-
-    if (!(await bcrypt.compare(password, user.passwordHash)))
-      return res.status(404).json({ msg: "invalid email or password " });
-
-    const token = generateToken(user);
-
-    return res.status(200).json({
-      user: {
-        id: user._id,
-        name: user.name,
-        role: user.role,
-      },
-      token: token,
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-});
-
-userRouter.get("/list", async (req, res) => {
-  try {
-    const usersList = await UserModel.find({});
-    return res.status(200).json(usersList);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-});
-
-userRouter.get("/profile", isAuth, attachCurrentUser, (req, res) => {
-  const loggedInUser = req.currentUser;
-  return res.status(201).json(loggedInUser);
-});
+userRouter.get(
+  "/profile",
+  isAuth,
+  attachCurrentUser,
+  profileUserController.profile
+);
 
 export { userRouter };
