@@ -2,6 +2,9 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { UserModel } from "../model/user.model.js";
 import { generateToken } from "../config/jwt.config.js";
+import isAuth from "../middlewares/isAuth.js";
+import attachCurrentUser from "../middlewares/attachCurrentUser.js";
+import { isAdmin } from "../middlewares/isAdmin.js";
 
 const userRouter = express.Router();
 
@@ -56,13 +59,17 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.get("/list", async (req, res) => {
   try {
-    console.log("oi");
     const usersList = await UserModel.find({});
     return res.status(200).json(usersList);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
   }
+});
+
+userRouter.get("/profile", isAuth, attachCurrentUser, (req, res) => {
+  const loggedInUser = req.currentUser;
+  return res.status(201).json(loggedInUser);
 });
 
 export { userRouter };
