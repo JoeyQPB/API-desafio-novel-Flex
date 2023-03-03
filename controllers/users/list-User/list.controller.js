@@ -1,5 +1,5 @@
 import express from "express";
-import { UserModel } from "../../model/user.model.js";
+import { UserModel } from "../../../model/user.model.js";
 
 export const listUserController = {
   async list(req, res) {

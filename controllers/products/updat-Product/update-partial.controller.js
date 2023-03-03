@@ -1,4 +1,4 @@
-import { ProductModel } from "../../model/product.model.js";
+import { ProductModel } from "../../../model/product.model.js";
 
 export const updatePartialProductController = {
   async handle(req, res) {

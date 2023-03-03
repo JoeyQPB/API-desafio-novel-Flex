@@ -1,5 +1,5 @@
-import { ProductModel } from "../../model/product.model.js";
-import { validateFields } from "../../utils/requeridFields.js";
+import { ProductModel } from "../../../model/product.model.js";
+import { validateFields } from "../../../utils/requeridFields.js";
 
 export const updateProductController = {
   async handle(req, res) {

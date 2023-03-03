@@ -1,10 +1,10 @@
 import express from "express";
 import isAuth from "../middlewares/isAuth.js";
 import attachCurrentUser from "../middlewares/attachCurrentUser.js";
-import { signupUserController } from "../controllers/users/signup.controller.js";
-import { loginUserController } from "../controllers/users/login.controller.js";
-import { listUserController } from "../controllers/users/list.controller.js";
-import { profileUserController } from "../controllers/users/profile.controller.js";
+import { signupUserController } from "../controllers/users/crete-User/signup.controller.js";
+import { listUserController } from "../controllers/users/list-User/list.controller.js";
+import { loginUserController } from "../controllers/users/login-User/login.controller.js";
+import { profileUserController } from "../controllers/users/profile-User/profile.controller.js";
 
 const userRouter = express.Router();
 

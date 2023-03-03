@@ -1,6 +1,6 @@
-import { ProductModel } from "../../model/product.model.js";
-import { UserModel } from "../../model/user.model.js";
-import { validateFields } from "../../utils/requeridFields.js";
+import { ProductModel } from "../../../model/product.model.js";
+import { UserModel } from "../../../model/user.model.js";
+import { validateFields } from "../../../utils/requeridFields.js";
 
 export const createProductController = {
   async handle(req, res) {
