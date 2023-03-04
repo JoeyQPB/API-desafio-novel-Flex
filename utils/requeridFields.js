@@ -4,7 +4,7 @@ export function validateFields(req, requireFieldsString, requireFieldsNumber) {
   requireFieldsString.forEach((field) => {
     if (!req.body[`${field}`] || typeof req.body[`${field}`] !== "string") {
       error = true;
-      msg = `Can not defined -${field}-`;
+      msg = `Missing required fields: ${field}`;
     }
   });
 
@@ -15,7 +15,7 @@ export function validateFields(req, requireFieldsString, requireFieldsNumber) {
       req.body[`${field}`] < 0
     ) {
       error = true;
-      msg = `Can not defined -${field}-`;
+      msg = `Missing required fields: ${field}`;
     }
   });
 
