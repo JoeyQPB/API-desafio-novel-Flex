@@ -1,14 +1,15 @@
 import express from "express";
 import { createProductController } from "../controllers/products/create-Product/create.controller.js";
 import { deleteProductController } from "../controllers/products/delete-Product/delete.controller.js";
-import { filterByDescriptionController } from "../controllers/products/filter-Product/filter-by-description.controller.js";
-import { filterByNameController } from "../controllers/products/filter-Product/filter-by-name.controller.js";
-import { listProductByNameController } from "../controllers/products/list-Product/list-by-name.controller.js";
-import { listProductByPriceController } from "../controllers/products/list-Product/list-by-price.controller.js";
-import { listProductController } from "../controllers/products/list-Product/list.controller.js";
+import { filterByDescriptionController } from "../controllers/products/filter-Product/by-description/filter-by-description.controller.js";
+import { filterByNameController } from "../controllers/products/filter-Product/by-name/filter-by-name.controller.js";
+import { listProductByNameController } from "../controllers/products/list-Product/by-name/list-by-name.controller.js";
+import { listProductByPriceController } from "../controllers/products/list-Product/by-price/list-by-price.controller.js";
+import { listProductController } from "../controllers/products/list-Product/list/list.controller.js";
 import { showProductController } from "../controllers/products/show-Product/show.controller.js";
-import { updatePartialProductController } from "../controllers/products/updat-Product/update-partial.controller.js";
-import { updateProductController } from "../controllers/products/updat-Product/update.controller.js";
+import { updatePartialProductController } from "../controllers/products/updat-Product/update-partaial/update-partial.controller.js";
+import { updateProductController } from "../controllers/products/updat-Product/update/update.controller.js";
+
 import attachCurrentUser from "../middlewares/attachCurrentUser.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 import isAuth from "../middlewares/isAuth.js";
