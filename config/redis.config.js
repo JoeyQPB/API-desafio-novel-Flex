@@ -1,11 +1,13 @@
 import { Redis } from "ioredis";
-import { promisify } from "util";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const redisClient = new Redis({
   port: 6379,
   host: "127.0.0.1",
-  username: "joey",
-  password: "mypassword",
+  username: process.env.USERNAME_REDIS,
+  password: process.env.PASSWORD_REDIS,
   db: 0,
   enableReadyCheck: true,
 });
