@@ -1,12 +1,11 @@
-import { ProductModel } from "../../../model/product.model.js";
-import { redisClient } from "../../../config/redis.config.js";
-import { ListOrderByName } from "../../../utils/listOrderByName.js";
+import { ProductModel } from "../../../../model/product.model.js";
+import { redisClient } from "../../../../config/redis.config.js";
 
-export const listProductByNameController = {
+export const listProductByPriceController = {
   async handle(req, res) {
     try {
       let products;
-      products = await redisClient.get(`products`);
+      products = await redisClient.get(`products-by-price`);
       products = JSON.parse(products);
 
       if (!products) {
@@ -16,11 +15,16 @@ export const listProductByNameController = {
             .status(404)
             .json({ msg: "no product has been registered" });
         }
-        products = ListOrderByName(products);
-        await redisClient.set(`products`, JSON.stringify(products), "EX", 10);
+        await redisClient.set(
+          `products-by-price`,
+          JSON.stringify(products),
+          "EX",
+          10
+        );
         console.log("FROM DATABASE");
       }
 
+      products = products.sort((a, b) => a.price - b.price);
       return res.status(200).json(products);
     } catch (err) {
       console.log(err);

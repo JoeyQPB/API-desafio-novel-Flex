@@ -1,4 +1,4 @@
-import { ProductModel } from "../../../model/product.model.js";
+import { ProductModel } from "../../../../model/product.model.js";
 
 export const filterByNameController = {
   async handle(req, res) {
@@ -9,10 +9,11 @@ export const filterByNameController = {
         });
       }
 
-      const productsFilter = await ProductModel.find({
+      const productsFilter = await ProductModel.findOne({
         name: req.body.inputName,
       });
-      if (productsFilter.length < 1)
+
+      if (!productsFilter)
         return res.status(404).json({ msg: "Product not found" });
 
       return res.status(200).json(productsFilter);

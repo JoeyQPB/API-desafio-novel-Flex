@@ -1,7 +1,7 @@
-import { ProductModel } from "../../../model/product.model.js";
-import { redisClient } from "../../../config/redis.config.js";
+import { ProductModel } from "../../../../model/product.model.js";
+import { redisClient } from "../../../../config/redis.config.js";
 
-export const listProductByPriceController = {
+export const listProductController = {
   async handle(req, res) {
     try {
       let products;
@@ -15,10 +15,10 @@ export const listProductByPriceController = {
             .status(404)
             .json({ msg: "no product has been registered" });
         }
-        products = products.sort((a, b) => a.price - b.price);
         await redisClient.set(`products`, JSON.stringify(products), "EX", 10);
         console.log("FROM DATABASE");
       }
+
       return res.status(200).json(products);
     } catch (err) {
       console.log(err);

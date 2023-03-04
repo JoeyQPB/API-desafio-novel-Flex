@@ -1,5 +1,5 @@
-import { ProductModel } from "../../../model/product.model.js";
-import { validateFields } from "../../../utils/requeridFields.js";
+import { ProductModel } from "../../../../model/product.model.js";
+import { validateFields } from "../../../../utils/requeridFields.js";
 
 export const updateProductController = {
   async handle(req, res) {
@@ -19,7 +19,7 @@ export const updateProductController = {
         { _id: req.params.id },
         {
           ...req.body,
-          $push: { updatedAt: Date.now(), updatedBy: loggedInUser._id },
+          $push: { updatedBy: loggedInUser._id },
         },
         { new: true, runValidators: true }
       );

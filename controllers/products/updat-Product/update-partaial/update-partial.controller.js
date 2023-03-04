@@ -1,4 +1,4 @@
-import { ProductModel } from "../../../model/product.model.js";
+import { ProductModel } from "../../../../model/product.model.js";
 
 export const updatePartialProductController = {
   async handle(req, res) {
@@ -8,7 +8,7 @@ export const updatePartialProductController = {
         { _id: req.params.id },
         {
           ...req.body,
-          $push: { updatedAt: Date.now(), updatedBy: loggedInUser._id },
+          $push: { updatedBy: loggedInUser._id },
         },
         { new: true, runValidators: true }
       );
