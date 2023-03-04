@@ -9,7 +9,11 @@ export function validateFields(req, requireFieldsString, requireFieldsNumber) {
   });
 
   requireFieldsNumber.forEach((field) => {
-    if (!req.body[`${field}`] || typeof req.body[`${field}`] !== "number") {
+    if (
+      !req.body[`${field}`] ||
+      typeof req.body[`${field}`] !== "number" ||
+      req.body[`${field}`] < 0
+    ) {
       error = true;
       msg = `Can not defined -${field}-`;
     }
