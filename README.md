@@ -47,6 +47,13 @@ $ npm run test
     "sinon-chai": "^3.7.0"
 </pre>
 
+## Instalação
+
+```bash
+# utilize o comando abaixo para installar as bibliotecas necessárias
+$ npm install <nome-do-package>@<version>, <nome-do-package>@<version> ...
+```
+
 # Entidades
 
 USER
