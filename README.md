@@ -740,3 +740,10 @@ responses: {
       possuem o uso de Redis para armazenamento em Cache do resultado das requisções. 
       O cache é válido por apenas 10 segundos
 </pre>
+
+## Arquitetura
+
+![rest-api-arquitetura](https://user-images.githubusercontent.com/114830843/222938650-4739123a-5c7a-4781-8594-dd959130ca9e.png)
+
+
+
