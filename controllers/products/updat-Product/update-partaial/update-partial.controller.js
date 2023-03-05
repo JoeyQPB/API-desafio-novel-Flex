@@ -12,6 +12,10 @@ export const updatePartialProductController = {
         },
         { new: true, runValidators: true }
       );
+
+      if (!updatedPartialProduct)
+        return res.status(404).json({ msg: "Product not found" });
+
       return res.status(200).json(updatedPartialProduct);
     } catch (err) {
       console.log(err);

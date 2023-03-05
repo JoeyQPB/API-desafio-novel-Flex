@@ -23,6 +23,10 @@ export const updateProductController = {
         },
         { new: true, runValidators: true }
       );
+
+      if (!updatedProduct)
+        return res.status(404).json({ msg: "Product not found" });
+
       return res.status(200).json(updatedProduct);
     } catch (err) {
       console.log(err);
