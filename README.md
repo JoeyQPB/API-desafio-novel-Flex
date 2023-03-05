@@ -51,7 +51,7 @@ $ npm run test
 
 ```bash
 # utilize o comando abaixo para installar as bibliotecas necessárias
-$ npm install <nome-do-package>@<version>, <nome-do-package>@<version> ...
+$ npm install <nome-do-package>@<version> <nome-do-package>@<version> ...
 ```
 
 # Entidades
