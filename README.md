@@ -72,11 +72,11 @@ Product = {
   photo: { type: String },
 }</pre>
 
-# PATHS
+# ROTAS
 
 ## User
 
-## /users/signup
+Path: /users/signup
 
 <pre>
 {
@@ -106,13 +106,14 @@ responses: {
 }
 </pre>
 
-## /users/login
+Path: /users/login
 
 <pre>
 {
 ## method: POST
 summary: loggin user,
-description: Rota responsável por os dados de login do usuário e retornar sua informações e um token jwt válido com sua role,
+description: Rota responsável por os dados de login do usuário e retornar sua informações e um token 
+      jwt válido com sua role,
 requestBody: {
 	"name": "USER1010",
 	"password": "USER123",
@@ -140,7 +141,7 @@ responses: {
 }
 </pre>
 
-## /users/list
+Path: /users/list
 
 <pre>
 {
@@ -178,7 +179,7 @@ responses: {
 }
 </pre>
 
-## /users/profile
+##Path:/users/profile
 
 <pre>
 {
@@ -212,7 +213,7 @@ responses: {
 
 ## Product
 
-## /product/create_product
+Path: /product/create_product
 
 <pre>
 {
@@ -252,7 +253,7 @@ responses: {
 }
 </pre>
 
-## /product/filter_name
+##Path: /product/filter_name
 
 <pre>
 {
@@ -293,13 +294,14 @@ responses: {
 }
 </pre>
 
-## /product/filter_description
+Path: /product/filter_description
 
 <pre>
 {
 ## method: POST
 summary: Filter Product by description,
-description: Rota responsável por recber a descrição de um produto e retornar todos os produtos que contém a descrição,
+description: Rota responsável por recber a descrição de um produto e retornar todos os produtos que 
+      contém a descrição,
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN/USER válido
 requestBody: {
@@ -347,7 +349,7 @@ responses: {
 }
 </pre>
 
-## /product/list
+Path: /product/list
 
 <pre>
 {
@@ -403,13 +405,14 @@ responses: {
 }
 </pre>
 
-## /product/list_name
+Path: /product/list_name
 
 <pre>
 {
 ## method: GET
 summary: list users,
-description: Rota responsável por retornar um Array ordenado alfabeticamente pelo campo "name" com todos os usuário cadastrados no BD
+description: Rota responsável por retornar um Array ordenado alfabeticamente pelo campo "name" com 
+      todos os usuário cadastrados no BD
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN/USER válido
 requestBody: {},
@@ -463,13 +466,14 @@ responses: {
 }
 </pre>
 
-## /product/list_price
+Path: /product/list_price
 
 <pre>
 {
 ## method: GET
 summary: list users,
-description: Rota responsável por retornar um Array ordenado crescentemente pelo campo "price" com todos os usuário cadastrados no BD
+description: Rota responsável por retornar um Array ordenado crescentemente pelo campo "price" com 
+      todos os usuário cadastrados no BD
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN/USER válido
 requestBody: {},
@@ -523,13 +527,14 @@ responses: {
 }
 </pre>
 
-## /product/show/:id
+Path: /product/show/:id
 
 <pre>
 {
 ## method: GET
 summary: list users,
-description: Rota responsável por retornar um produto ordenado crescentemente pelo campo "price" com todos os usuário cadastrados no BD
+description: Rota responsável por retornar um produto ordenado crescentemente pelo campo "price" com 
+      todos os usuário cadastrados no BD
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN/USER válido
 reqParams: req.params.id = {ID DO PRODUTO}
@@ -567,14 +572,16 @@ responses: {
 }
 </pre>
 
-## /product/update/:id
+Path: /product/update/:id
 
 <pre>
 {
 ## method: PUT
 summary: updated Product,
-description: Rota responsável por recber o id de um produto já existente e o dados a serem atualizados do mesmo,
-Observação: Todos os campos required que não são preenchidos pelo BD devem ser fornecidos no body da requisição
+description: Rota responsável por recber o id de um produto já existente e o dados a serem atualizados 
+      do mesmo,
+Observação: Todos os campos required que não são preenchidos pelo BD devem ser fornecidos no body da 
+      requisição
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN válido
 reqParams: req.params.id = {ID DO PRODUTO}
@@ -617,13 +624,14 @@ responses: {
 }
 </pre>
 
-## /product/update_partial/:id
+Path: /product/update_partial/:id
 
 <pre>
 {
 ## method: PATCH
 summary: Update Partial Product,
-description: Rota responsável por recber o id de um produto já existente e o dados a serem atualizados do mesmo,
+description: Rota responsável por recber o id de um produto já existente e o dados a serem atualizados  
+      do mesmo,
 Observação: o body da requisição deverá ter somente os campos que se deseja atualizar como novo valor
 security: [{ "bearerAuth": [] }],
 reqAuth: accessToken ADMIN válido
@@ -660,7 +668,7 @@ responses: {
 }
 </pre>
 
-## /product/delete/:id
+Path: /product/delete/:id
 
 <pre>
 {
@@ -691,7 +699,7 @@ responses: {
 
 ## Upload File
 
-## /upload_image
+Path: /upload_image
 
 <pre>
 {
@@ -721,5 +729,7 @@ responses: {
 
 <pre>
 - Todas as rotas possuem um MiddleWare "apiLimiter" que limita as requisções da API à 40 por minuto.
-- As Rotas {"/product/list", "/product/list_name", "/product/list_price" e /product/show/:id } possuem o uso de Redis para armazenamento em Cache do resultado das requisções. O cache é válido por apenas 10 segundos
+- As Rotas {"/product/list", "/product/list_name", "/product/list_price" e /product/show/:id } 
+      possuem o uso de Redis para armazenamento em Cache do resultado das requisções. 
+      O cache é válido por apenas 10 segundos
 </pre>
