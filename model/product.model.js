@@ -7,6 +7,7 @@ const productSchema = new Schema({
   createdBy: { type: Types.ObjectId, ref: "User", require: true },
   createdAt: { type: Date, default: Date.now() },
   updatedBy: [{ type: Types.ObjectId, ref: "User", require: true }],
+  photo: { type: String },
 });
 
 export const ProductModel = model("Product", productSchema);
