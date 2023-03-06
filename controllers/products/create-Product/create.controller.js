@@ -5,6 +5,7 @@ import { validateFields } from "../../../utils/requeridFields.js";
 export const createProductController = {
   async handle(req, res) {
     try {
+      req.body.price = Number(req.body.price);
       const { error, msg } = validateFields(
         req,
         ["name", "description"],
