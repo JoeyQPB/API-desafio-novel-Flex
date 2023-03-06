@@ -5,11 +5,13 @@ import { userRouter } from "./routes/user.routes.js";
 import { productRouter } from "./routes/product.routes.js";
 import { uploadImgRouter } from "./routes/upload-image.routes.js";
 import { apiLimiter } from "./middlewares/limiter.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 dbConnect();
 app.use(express.json());
+app.use(cors());
 
 app.use(`/user`, apiLimiter, userRouter);
 app.use(`/product`, apiLimiter, productRouter);
