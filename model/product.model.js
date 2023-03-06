@@ -7,7 +7,11 @@ const productSchema = new Schema({
   createdBy: { type: Types.ObjectId, ref: "User", require: true },
   createdAt: { type: Date, default: Date.now() },
   updatedBy: [{ type: Types.ObjectId, ref: "User", require: true }],
-  photo: { type: String },
+  photo: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dqeehrnvz/image/upload/v1678128569/pictures/file_evrba0.png",
+  },
 });
 
 export const ProductModel = model("Product", productSchema);
