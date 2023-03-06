@@ -15,7 +15,7 @@ export function validateFields(req, requireFieldsString, requireFieldsNumber) {
       req.body[`${field}`] < 0
     ) {
       error = true;
-      msg = `Missing required fields: ${field}`;
+      msg = `Missing required fields: ${field} and must to be a number`;
     }
   });
 
