@@ -83,7 +83,7 @@ Product = {
 
 ## User
 
-Path: /users/signup
+Path: /user/signup
 
 <pre>
 {
@@ -113,7 +113,7 @@ responses: {
 }
 </pre>
 
-Path: /users/login
+Path: /user/login
 
 <pre>
 {
@@ -148,7 +148,7 @@ responses: {
 }
 </pre>
 
-Path: /users/list
+Path: /user/list
 
 <pre>
 {
